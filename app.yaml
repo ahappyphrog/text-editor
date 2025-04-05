@@ -5,10 +5,10 @@ services:
     repo: ahappyphrog/text-editor
     branch: main
   build_command: npm run build
-  run_command: npx serve -s dist
+  run_command: npm start
   http_port: 3000
   routes:
   - path: /
   env:
   - key: NODE_ENV
-    value: production n
+    value: production

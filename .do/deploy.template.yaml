@@ -1,0 +1,18 @@
+spec:
+  name: text-editor
+  services:
+  - name: web
+    git:
+      branch: main
+      repo_clone_url: https://github.com/ahappyphrog/text-editor.git
+    build_command: npm run build
+    run_command: npm start
+    http_port: 3000
+    routes:
+    - path: /
+    envs:
+    - key: NODE_ENV
+      value: production
+    health_check:
+      http_path: /
+      initial_delay_seconds: 10 

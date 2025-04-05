@@ -3,16 +3,23 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "engines": {
+    "node": ">=18.20.7",
+    "npm": ">=10.8.2"
+  },
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "clean": "rimraf dist",
+    "build": "npm run clean && tsc -b --force && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "serve -s dist",
+    "test-build": "npm run build && npm start -- --listen 5000 --no-clipboard --no-port-switching"
   },
   "dependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "serve": "^14.2.1"
+    "serve": "^14.2.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
@@ -26,6 +33,7 @@
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^15.15.0",
     "postcss": "^8.5.3",
+    "rimraf": "^5.0.10",
     "tailwindcss": "^4.1.2",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.24.1",
