@@ -1,0 +1,233 @@
+:root {
+  /* Primary color palette */
+  --primary-50: #eef2ff;
+  --primary-100: #e0e7ff;
+  --primary-200: #c7d2fe;
+  --primary-300: #a5b4fc;
+  --primary-400: #818cf8;
+  --primary-500: #6366f1;
+  --primary-600: #4f46e5;
+  --primary-700: #4338ca;
+  --primary-800: #3730a3;
+  --primary-900: #312e81;
+  
+  /* Neutral color palette */
+  --neutral-50: #f9fafb;
+  --neutral-100: #f3f4f6;
+  --neutral-200: #e5e7eb;
+  --neutral-300: #d1d5db;
+  --neutral-400: #9ca3af;
+  --neutral-500: #6b7280;
+  --neutral-600: #4b5563;
+  --neutral-700: #374151;
+  --neutral-800: #1f2937;
+  --neutral-900: #111827;
+  
+  /* Success, warning, error colors */
+  --success-50: #ecfdf5;
+  --success-500: #10b981;
+  --success-700: #047857;
+  
+  --warning-50: #fffbeb;
+  --warning-500: #f59e0b;
+  --warning-700: #b45309;
+  
+  --error-50: #fef2f2;
+  --error-500: #ef4444;
+  --error-700: #b91c1c;
+  
+  /* Custom theme colors */
+  --header-light: #161d28;
+  --background-light: #f3f3eb;
+  --accent-light: #d86a30;
+  --accent-light-rgba: rgba(216, 106, 48, 0.2);
+  --editor-light: #f5f5f0;
+  --toolbar-light: #eeeeea;
+  
+  --header-dark: #e15c2a;
+  --background-dark: #1c1c1c;
+  --accent-dark: #e15c2a;
+  --accent-dark-rgba: rgba(225, 92, 42, 0.2);
+  --editor-dark: #2c2c2c;
+  --toolbar-dark: #252525;
+  
+  /* Light theme (default) */
+  --background-primary: var(--background-light);
+  --background-secondary: var(--background-light);
+  --background-tertiary: var(--neutral-200);
+  --editor-background: var(--editor-light);
+  --toolbar-background: var(--toolbar-light);
+  
+  /* Button active/pressed state colors */
+  --toolbar-pressed: #e5e5de;
+  --background-pressed: #e5e5d8;
+  
+  --text-primary: var(--neutral-900);
+  --text-secondary: var(--neutral-900);
+  --text-tertiary: var(--neutral-500);
+  --text-inverted: var(--neutral-50);
+  --header-text: var(--header-light);
+  
+  --border-light: var(--neutral-200);
+  --border-medium: var(--neutral-300);
+  --border-heavy: var(--neutral-400);
+  
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  
+  /* Functional colors */
+  --accent-color: var(--accent-light);
+  --accent-color-hover: var(--accent-light);
+  --accent-color-light: var(--accent-light-rgba);
+  
+  /* Selection colors */
+  --selection-background: var(--accent-light-rgba);
+  --selection-text: var(--text-primary);
+  
+  /* Spacing variables */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  
+  /* Typography */
+  --font-family: Helvetica, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  
+  /* Border radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-full: 9999px;
+  
+  /* Icon theming */
+  --icon-filter: none;
+  
+  /* Theme transition - consistent across all themed elements */
+  --theme-transition-duration: 500ms;
+  --theme-transition-timing: ease;
+  
+  /* Apply transitions to all color properties and backgrounds */
+  transition: 
+    color var(--theme-transition-duration) var(--theme-transition-timing),
+    background-color var(--theme-transition-duration) var(--theme-transition-timing),
+    border-color var(--theme-transition-duration) var(--theme-transition-timing),
+    box-shadow var(--theme-transition-duration) var(--theme-transition-timing),
+    filter var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-primary: var(--background-dark);
+    --background-secondary: var(--background-dark);
+    --background-tertiary: var(--neutral-700);
+    --editor-background: var(--editor-dark);
+    --toolbar-background: var(--toolbar-dark);
+    
+    /* Button active/pressed state colors for dark theme */
+    --toolbar-pressed: #1a1a1a;
+    --background-pressed: #171717;
+    
+    --text-primary: var(--neutral-50);
+    --text-secondary: var(--neutral-200);
+    --text-tertiary: var(--neutral-400);
+    --text-inverted: var(--neutral-900);
+    --header-text: var(--header-dark);
+    
+    --border-light: var(--neutral-700);
+    --border-medium: var(--neutral-600);
+    --border-heavy: var(--neutral-500);
+    
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+    
+    /* Update accent color for dark mode */
+    --accent-color: var(--accent-dark);
+    --accent-color-hover: var(--accent-dark);
+    --accent-color-light: var(--accent-dark-rgba);
+    
+    /* Selection colors for dark mode */
+    --selection-background: var(--accent-dark-rgba);
+    --selection-text: var(--text-primary);
+    
+    /* Icon theming for dark mode */
+    --icon-filter: brightness(1.8);
+    
+    /* Transitions are inherited from :root */
+  }
+}
+
+/* Class-based theme toggle (for JavaScript theme switching) */
+.dark-theme {
+  --background-primary: var(--background-dark);
+  --background-secondary: var(--background-dark);
+  --background-tertiary: var(--neutral-700);
+  --editor-background: var(--editor-dark);
+  --toolbar-background: var(--toolbar-dark);
+  
+  /* Button active/pressed state colors for dark theme */
+  --toolbar-pressed: #1a1a1a;
+  --background-pressed: #171717;
+  
+  --text-primary: var(--neutral-50);
+  --text-secondary: var(--neutral-200);
+  --text-tertiary: var(--neutral-400);
+  --text-inverted: var(--neutral-900);
+  --header-text: var(--header-dark);
+  
+  --border-light: var(--neutral-700);
+  --border-medium: var(--neutral-600);
+  --border-heavy: var(--neutral-500);
+  
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+  
+  /* Update accent color for dark mode */
+  --accent-color: var(--accent-dark);
+  --accent-color-hover: var(--accent-dark);
+  --accent-color-light: var(--accent-dark-rgba);
+  
+  /* Selection colors for dark mode */
+  --selection-background: var(--accent-dark-rgba);
+  --selection-text: var(--text-primary);
+  
+  /* Icon theming for dark mode */
+  --icon-filter: brightness(1.8);
+  
+  /* Transitions are inherited from :root */
+}
+
+/* Apply transitions to html for complete document */
+html {
+  transition: background-color var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+/* Text selection styling with theme transitions */
+::selection {
+  background-color: var(--selection-background);
+  color: var(--selection-text);
+  transition: 
+    background-color var(--theme-transition-duration) var(--theme-transition-timing),
+    color var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+/* For Firefox */
+::-moz-selection {
+  background-color: var(--selection-background);
+  color: var(--selection-text);
+  transition: 
+    background-color var(--theme-transition-duration) var(--theme-transition-timing),
+    color var(--theme-transition-duration) var(--theme-transition-timing);
+} 

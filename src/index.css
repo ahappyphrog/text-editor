@@ -1,0 +1,41 @@
+@import './theme.css';
+
+/* Ensure all elements inherit transition properties */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  transition: 
+    background-color var(--theme-transition-duration) var(--theme-transition-timing),
+    color var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+body {
+  font-family: var(--font-family);
+  line-height: 1.5;
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+  margin-top: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+}
+
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-color-hover);
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+}

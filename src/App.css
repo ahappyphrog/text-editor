@@ -1,0 +1,763 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--spacing-xl);
+  text-align: center;
+  transition: 
+    background-color var(--theme-transition-duration) var(--theme-transition-timing),
+    color var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em var(--accent-color));
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em var(--accent-color));
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: var(--text-tertiary);
+}
+
+/* Editor Container */
+.editor-container {
+  width: 100%;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  overflow: visible;
+  transition: 
+    border-color var(--theme-transition-duration) var(--theme-transition-timing),
+    box-shadow var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+.editor-container:focus-within {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px var(--accent-color-light);
+}
+
+/* Toolbar */
+.editor-toolbar {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-sm);
+  border-bottom: 1px solid var(--border-light);
+  background-color: var(--toolbar-background);
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  transition: 
+    background-color var(--theme-transition-duration) var(--theme-transition-timing),
+    border-color var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+.toolbar-button {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-md);
+  margin-right: var(--spacing-xs);
+  background: transparent;
+  color: var(--text-secondary);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+}
+
+.toolbar-button:hover {
+  background-color: var(--toolbar-pressed);
+}
+
+.toolbar-button.active {
+  background-color: var(--toolbar-pressed);
+  color: var(--text-primary);
+}
+
+.toolbar-divider {
+  margin: 0 var(--spacing-xs);
+  height: 1.5rem;
+  width: .5px;
+  background-color: var(--border-medium);
+  transition: background-color var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+.editor-spacer {
+  flex: 1;
+}
+
+.export-button {
+  display: flex;
+  align-items: center;
+  padding: 0.375rem;
+  border-radius: 0.375rem;
+  margin-right: 0.25rem;
+  background: transparent;
+  color: var(--text-secondary);
+  border: none;
+  cursor: pointer;
+  font-size: 0.75rem;
+  min-width: 60px;
+}
+
+.export-button .icon-current {
+  width: 14px;
+  height: 14px;
+  margin-left: 4px;
+}
+
+.export-button span {
+  margin-right: 0.25rem;
+}
+
+.export-button:hover {
+  background-color: var(--toolbar-pressed);
+}
+
+/* Editor Content */
+.editor-content {
+  border: 1px solid var(--border-light);
+  border-top: none;
+  padding: var(--spacing-md);
+  min-height: 200px;
+  background-color: var(--editor-background);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  font-size: var(--font-size-md);
+  line-height: 1.2;
+  outline: none;
+  text-align: left;
+  color: var(--text-primary);
+  transition: 
+    background-color var(--theme-transition-duration) var(--theme-transition-timing),
+    border-color var(--theme-transition-duration) var(--theme-transition-timing),
+    color var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+/* Ensure all editor content elements have transitions */
+.editor-content * {
+  transition: 
+    color var(--theme-transition-duration) var(--theme-transition-timing),
+    background-color var(--theme-transition-duration) var(--theme-transition-timing),
+    border-color var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+.editor-content:focus {
+  outline: none;
+}
+
+/* Selection inside editor content */
+.editor-content ::selection {
+  background-color: var(--selection-background);
+  color: var(--selection-text);
+  transition: 
+    background-color var(--theme-transition-duration) var(--theme-transition-timing),
+    color var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+/* For Firefox */
+.editor-content ::-moz-selection {
+  background-color: var(--selection-background);
+  color: var(--selection-text);
+  transition: 
+    background-color var(--theme-transition-duration) var(--theme-transition-timing),
+    color var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+.editor-content[contenteditable]:empty:before {
+  content: attr(data-placeholder);
+  color: var(--text-tertiary);
+  font-style: italic;
+}
+
+/* Image handling in editor */
+.editor-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0.5rem 0;
+  border-radius: 0.25rem;
+}
+
+.editor-content img:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+/* Break fix for cursor after images */
+.editor-content img + br {
+  display: block;
+  height: 1em;
+  content: '';
+}
+
+/* App Layout */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-primary);
+  padding: var(--spacing-lg);
+  transition: 
+    background-color var(--theme-transition-duration) var(--theme-transition-timing),
+    color var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+.app-header {
+  margin-bottom: var(--spacing-lg);
+  color: var(--header-text);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+}
+
+.header-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  color: var(--header-text);
+}
+
+.header-content > div {
+  text-align: center;
+  width: 100%;
+}
+
+.app-title {
+  font-size: 6.5rem;
+  font-weight: 900;
+  color: var(--header-text);
+  margin-top: 0;
+  margin-bottom: 0;
+  transition: color var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+.app-subtitle {
+  font-size: 1.5rem;
+  font-weight: 100;
+  letter-spacing: 0.05em;
+  margin-top: -0.5rem;
+  color: var(--header-text);
+  transition: color var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+.editor-wrapper {
+  width: 100%;
+  max-width: 64rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5rem;
+}
+
+.preview-section {
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 64rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.preview-header {
+  border-top: 1px solid var(--border-light);
+  padding-top: 1rem;
+}
+
+.preview-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.preview-content {
+  padding: 1rem;
+  border: 1px solid var(--border-light);
+  border-radius: 0.375rem;
+  min-height: 100px;
+  background-color: var(--background-primary);
+  overflow-wrap: break-word;
+}
+
+.preview-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.25rem;
+}
+
+.preview-placeholder {
+  color: var(--text-tertiary);
+}
+
+/* Editor Select Dropdown */
+.toolbar-select {
+  padding: 0.375rem;
+  border-radius: var(--radius-md);
+  margin-right: var(--spacing-xs);
+  background-color: var(--toolbar-background);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-light);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  min-width: 120px;
+  transition: 
+    background-color var(--theme-transition-duration) var(--theme-transition-timing),
+    border-color var(--theme-transition-duration) var(--theme-transition-timing),
+    color var(--theme-transition-duration) var(--theme-transition-timing),
+    box-shadow var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+.toolbar-select:hover {
+  background-color: var(--toolbar-pressed);
+}
+
+.toolbar-select:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 1px var(--accent-color-light);
+}
+
+.toolbar-select option {
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+  padding: 8px;
+  transition: 
+    background-color var(--theme-transition-duration) var(--theme-transition-timing),
+    color var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+/* Style for option hover - Note: this has limited browser support */
+.toolbar-select option:hover,
+.toolbar-select option:focus,
+.toolbar-select option:checked {
+  background-color: var(--accent-color-light);
+  color: var(--accent-color);
+}
+
+/* For browsers that support these selectors */
+@media (hover: hover) {
+  .toolbar-select option:hover {
+    background-color: var(--accent-color-light);
+    color: var(--accent-color);
+  }
+}
+
+/* Additional select styling to improve custom appearance */
+.toolbar-select::-ms-expand {
+  display: none; /* Remove default arrow in IE */
+}
+
+/* Add a custom arrow indicator */
+.toolbar-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='6' fill='none' viewBox='0 0 12 6'><path stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M1 1l5 4 5-4'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  padding-right: 28px; /* Space for the arrow */
+}
+
+/* Custom Dropdown Styles */
+.custom-dropdown {
+  position: relative;
+  min-width: 120px;
+  cursor: pointer;
+  user-select: none;
+  font-size: var(--font-size-sm);
+  z-index: 100;
+}
+
+.custom-dropdown:focus {
+  outline: none;
+}
+
+.custom-dropdown:focus .dropdown-header {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 1px var(--accent-color-light);
+}
+
+.dropdown-header {
+  display: flex;
+  align-items: center;
+  padding: 0.375rem 0.75rem;
+  border-radius: var(--radius-md);
+  background-color: var(--toolbar-background);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-light);
+  transition: 
+    background-color var(--theme-transition-duration) var(--theme-transition-timing),
+    border-color var(--theme-transition-duration) var(--theme-transition-timing),
+    color var(--theme-transition-duration) var(--theme-transition-timing),
+    box-shadow var(--theme-transition-duration) var(--theme-transition-timing);
+  position: relative;
+  padding-right: 24px; /* Make room for the arrow */
+}
+
+.dropdown-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  text-align: left;
+}
+
+.dropdown-header:hover {
+  background-color: var(--toolbar-pressed);
+}
+
+.dropdown-arrow {
+  width: 12px;
+  height: 12px;
+  transition: transform 0.2s ease;
+  position: absolute;
+  right: 8px; /* Constant distance from the right edge */
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.custom-dropdown[aria-expanded="true"] .dropdown-arrow {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.dropdown-options {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background-color: var(--background-primary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  z-index: 100;
+  transition: 
+    background-color var(--theme-transition-duration) var(--theme-transition-timing),
+    border-color var(--theme-transition-duration) var(--theme-transition-timing);
+  padding: 4px 0;
+}
+
+.dropdown-option {
+  padding: 0.5rem 0.75rem;
+  color: var(--text-primary);
+  transition: 
+    background-color 0.15s ease,
+    color 0.15s ease;
+  cursor: pointer;
+}
+
+.dropdown-option:hover,
+.dropdown-option:focus {
+  background-color: var(--accent-color-light);
+  color: var(--accent-color);
+}
+
+.dropdown-option.selected {
+  background-color: var(--accent-color-light);
+  color: var(--accent-color);
+  font-weight: 500;
+}
+
+/* Custom toolbar select */
+.custom-toolbar-select {
+  display: inline-flex;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.custom-toolbar-select .dropdown-header {
+  height: 32px;
+  padding: 0 24px 0 8px; /* Reduce right padding to 24px for smaller chevron */
+  min-width: 120px;
+  display: flex;
+  align-items: center;
+}
+
+/* Disabled buttons */
+.toolbar-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Editor styling for nested lists */
+.editor-content ul {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.editor-content ul ul {
+  list-style-type: circle;
+}
+
+.editor-content ul ul ul {
+  list-style-type: square;
+}
+
+.editor-content ol {
+  list-style-type: decimal;
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.editor-content ol ol {
+  list-style-type: lower-alpha;
+}
+
+.editor-content ol ol ol {
+  list-style-type: lower-roman;
+}
+
+/* Indentation for lists */
+.editor-content ul ul,
+.editor-content ol ol,
+.editor-content ul ol,
+.editor-content ol ul {
+  margin-left: 1.5em;
+  margin-bottom: 0;
+}
+
+/* Heading styles in editor */
+.editor-content h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0.7rem 0 0.5rem;
+  line-height: 1.1;
+}
+
+.editor-content h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0.7rem 0 0.5rem;
+  line-height: 1.1;
+}
+
+.editor-content h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0.7rem 0 0.5rem;
+  line-height: 1.1;
+}
+
+.editor-content h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0.7rem 0 0.5rem;
+  line-height: 1.1;
+}
+
+.editor-content h5 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0.7rem 0 0.5rem;
+  line-height: 1.1;
+}
+
+.editor-content h6 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin: 0.7rem 0 0.5rem;
+  line-height: 1.1;
+}
+
+/* Override browser's default behavior for bold inside headings */
+.editor-content h1 b, .editor-content h1 strong,
+.editor-content h2 b, .editor-content h2 strong,
+.editor-content h3 b, .editor-content h3 strong,
+.editor-content h4 b, .editor-content h4 strong,
+.editor-content h5 b, .editor-content h5 strong,
+.editor-content h6 b, .editor-content h6 strong {
+  font-weight: inherit;
+}
+
+/* Adjust spacing for all block elements in the editor */
+.editor-content p {
+  margin: 0.5rem 0;
+}
+
+/* Make first element in editor not have top margin */
+.editor-content > :first-child {
+  margin-top: 0;
+}
+
+/* Make last element in editor not have bottom margin */
+.editor-content > :last-child {
+  margin-bottom: 0;
+}
+
+/* Tighten space between list items */
+.editor-content ul li,
+.editor-content ol li {
+  margin-bottom: 0.1rem;
+}
+
+.editor-content ul,
+.editor-content ol {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-light);
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: var(--spacing-xs);
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+
+.theme-toggle .icon-current {
+  width: 20px;
+  height: 20px;
+}
+
+.theme-toggle:hover {
+  background-color: var(--background-pressed);
+  transform: scale(1.02);
+}
+
+.theme-toggle:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--accent-color);
+}
+
+/* SVG Icon Theming - update with consistent transitions */
+.icon-current {
+  stroke: var(--text-secondary);
+  fill: none;
+  width: 100%;
+  height: 100%;
+  color: var(--text-secondary); /* For currentColor references */
+  transition: 
+    stroke var(--theme-transition-duration) var(--theme-transition-timing),
+    color var(--theme-transition-duration) var(--theme-transition-timing),
+    fill var(--theme-transition-duration) var(--theme-transition-timing),
+    filter var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+.theme-toggle .icon-current {
+  stroke: var(--text-primary);
+  color: var(--text-primary);
+}
+
+/* Active state styling for buttons */
+.toolbar-button.active .icon-current,
+.toolbar-button.active:hover .icon-current {
+  stroke: var(--accent-color);
+  color: var(--accent-color);
+}
+
+/* Hover state for normal buttons */
+.toolbar-button:hover .icon-current {
+  stroke: var(--text-primary);
+  color: var(--text-primary);
+}
+
+/* Export button styling */
+.export-button .icon-current {
+  stroke: var(--text-secondary);
+  color: var(--text-secondary);
+}
+
+.export-button:hover .icon-current {
+  stroke: var(--text-primary);
+  color: var(--text-primary);
+}
+
+/* Success state for export buttons - ensure it takes priority */
+.export-button .icon-current.success,
+.export-button:hover .icon-current.success {
+  stroke: var(--success-500);
+  color: var(--success-500);
+}
+
+/* Dark mode styles for icons are handled via CSS variables */
+
+/* Button active/clicked state - style and behavior */
+.toolbar-button:active,
+.export-button:active,
+.theme-toggle:active,
+.toolbar-button:active:hover,
+.export-button:active:hover,
+.theme-toggle:active:hover {
+  transform: scale(0.95);
+}
+
+/* Additional visual state for active toolbar buttons */
+.toolbar-button:active,
+.toolbar-button:active:hover {
+  background-color: var(--toolbar-pressed);
+}
+
+/* Additional visual state for active export buttons */
+.export-button:active,
+.export-button:active:hover {
+  background-color: var(--toolbar-pressed);
+}
+
+/* Theme toggle pressed state */
+.theme-toggle:active,
+.theme-toggle:active:hover {
+  background-color: var(--background-pressed);
+}
+
+/* Reduce the hover effect for theme toggle */
+.theme-toggle:hover {
+  background-color: var(--background-pressed);
+  transform: scale(1.02);
+}
+
+/* Common button behavior - update with theme transitions */
+.toolbar-button,
+.export-button,
+.theme-toggle {
+  transition: 
+    transform 0.1s ease-in-out, 
+    background-color var(--theme-transition-duration) var(--theme-transition-timing),
+    color var(--theme-transition-duration) var(--theme-transition-timing),
+    border-color var(--theme-transition-duration) var(--theme-transition-timing),
+    box-shadow var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+/* Custom dropdown arrow for toolbar select */
+.custom-toolbar-select .dropdown-arrow {
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}
