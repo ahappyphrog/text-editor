@@ -17,7 +17,7 @@ function App() {
         <div className="header-content">
           <div>
             <h1 className="app-title">WYSIWYG Editor</h1>
-            <p className="app-subtitle">A simple way to edit you content with rich formatting options</p>
+            <p className="app-subtitle">A simple way to edit your content with rich formatting options</p>
           </div>
           <ThemeToggle />
         </div>
