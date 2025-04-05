@@ -3,10 +3,13 @@
 /* Ensure all elements inherit transition properties */
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-html, body {
+html {
   height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
   transition: 
@@ -19,6 +22,9 @@ body {
   line-height: 1.5;
   background-color: var(--background-primary);
   color: var(--text-primary);
+  min-height: 100%;
+  position: relative;
+  padding-bottom: 150px; /* Add space at bottom of body */
 }
 
 h1, h2, h3, h4, h5, h6 {

@@ -1,7 +1,8 @@
 #root {
-  max-width: 1280px;
+  width: 100%;
+  min-height: 100%;
   margin: 0 auto;
-  padding: var(--spacing-xl);
+  padding: var(--spacing-lg);
   text-align: center;
   transition: 
     background-color var(--theme-transition-duration) var(--theme-transition-timing),
@@ -52,7 +53,10 @@
   overflow: visible;
   transition: 
     border-color var(--theme-transition-duration) var(--theme-transition-timing),
-    box-shadow var(--theme-transition-duration) var(--theme-transition-timing);
+    box-shadow var(--theme-transition-duration) var(--theme-transition-timing),
+    background-color var(--theme-transition-duration) var(--theme-transition-timing);
+  /* Add initial background color to prevent flash */
+  background-color: var(--background-primary);
 }
 
 .editor-container:focus-within {
@@ -156,15 +160,17 @@
   transition: 
     background-color var(--theme-transition-duration) var(--theme-transition-timing),
     border-color var(--theme-transition-duration) var(--theme-transition-timing),
-    color var(--theme-transition-duration) var(--theme-transition-timing);
+    box-shadow var(--theme-transition-duration) var(--theme-transition-timing);
+  /* Add initial transparent box-shadow to prevent flash */
+  box-shadow: 0 0 0 0 transparent;
 }
 
 /* Ensure all editor content elements have transitions */
 .editor-content * {
   transition: 
-    color var(--theme-transition-duration) var(--theme-transition-timing),
-    background-color var(--theme-transition-duration) var(--theme-transition-timing),
-    border-color var(--theme-transition-duration) var(--theme-transition-timing);
+    color 150ms var(--theme-transition-timing),
+    background-color 150ms var(--theme-transition-timing),
+    border-color 150ms var(--theme-transition-timing);
 }
 
 .editor-content:focus {
@@ -176,8 +182,8 @@
   background-color: var(--selection-background);
   color: var(--selection-text);
   transition: 
-    background-color var(--theme-transition-duration) var(--theme-transition-timing),
-    color var(--theme-transition-duration) var(--theme-transition-timing);
+    background-color 150ms var(--theme-transition-timing),
+    color 150ms var(--theme-transition-timing);
 }
 
 /* For Firefox */
@@ -185,8 +191,8 @@
   background-color: var(--selection-background);
   color: var(--selection-text);
   transition: 
-    background-color var(--theme-transition-duration) var(--theme-transition-timing),
-    color var(--theme-transition-duration) var(--theme-transition-timing);
+    background-color 150ms var(--theme-transition-timing),
+    color 150ms var(--theme-transition-timing);
 }
 
 .editor-content[contenteditable]:empty:before {
@@ -219,11 +225,10 @@
 
 /* App Layout */
 .app-container {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   background-color: var(--background-primary);
-  padding: var(--spacing-lg);
+  padding: 0;
   transition: 
     background-color var(--theme-transition-duration) var(--theme-transition-timing),
     color var(--theme-transition-duration) var(--theme-transition-timing);
@@ -250,7 +255,7 @@
 }
 
 .app-title {
-  font-size: 6.5rem;
+  font-size: clamp(3rem, 8vw, 6.5rem);
   font-weight: 900;
   color: var(--header-text);
   margin-top: 0;
@@ -259,7 +264,7 @@
 }
 
 .app-subtitle {
-  font-size: 1.5rem;
+  font-size: clamp(1rem, 2vw, 1.5rem);
   font-weight: 100;
   letter-spacing: 0.05em;
   margin-top: -0.5rem;
@@ -273,6 +278,10 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 5rem;
+  margin-bottom: 1rem;
+  transition: 
+    background-color var(--theme-transition-duration) var(--theme-transition-timing),
+    color var(--theme-transition-duration) var(--theme-transition-timing);
 }
 
 .preview-section {
@@ -732,6 +741,12 @@
 .theme-toggle:active,
 .theme-toggle:active:hover {
   background-color: var(--background-pressed);
+}
+
+/* Bottom spacer to ensure there's always scroll space after the editor */
+.bottom-spacer {
+  height: 150px;
+  width: 100%;
 }
 
 /* Reduce the hover effect for theme toggle */

@@ -722,6 +722,8 @@ const TextEditor: React.FC<TextEditorProps> = ({
     }
   };
 
+  // Function intentionally preserved for future use
+  // @ts-ignore
   const handleImageUpload = () => {
     const url = prompt('Enter image URL:');
     if (url) {

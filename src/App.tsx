@@ -4,7 +4,7 @@ import ThemeToggle from './components/ThemeToggle'
 import './App.css'
 
 function App() {
-  const [content, setContent] = useState<string>('')
+  const [_content, setContent] = useState<string>('')
 
   const handleValueChange = (value: string) => {
     setContent(value)
@@ -30,6 +30,8 @@ function App() {
           onValueChange={handleValueChange} 
         />
       </div>
+      
+      <div style={{ height: '20px', width: '100%' }}></div>
     </div>
   )
 }
