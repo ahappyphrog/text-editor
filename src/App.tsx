@@ -31,7 +31,7 @@ function App() {
         />
       </div>
       
-      <div style={{ height: '20px', width: '100%' }}></div>
+      <div className="spacer"></div>
     </div>
   )
 }

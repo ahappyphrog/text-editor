@@ -1,3 +1,110 @@
+/* App Layout and Components */
+.app-container {
+  width: 100%;
+  min-height: 100%;
+  margin: 0 auto;
+  text-align: center;
+  background-color: var(--background-primary);
+  transition: 
+    background-color var(--theme-transition-duration) var(--theme-transition-timing),
+    color var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+.app-header {
+  width: 100%;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  background-color: var(--background-primary);
+  color: var(--header-text);
+  transition: 
+    background-color var(--theme-transition-duration) var(--theme-transition-timing),
+    color var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+.header-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  color: var(--header-text);
+  transition: color var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+.app-title {
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-weight: 900;
+  color: var(--header-text);
+  margin-top: 0;
+  margin-bottom: 0;
+  transition: color var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+.app-subtitle {
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-weight: 100;
+  letter-spacing: 0.05em;
+  margin-top: -0.5rem;
+  color: var(--header-text);
+  transition: color var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+.editor-wrapper {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.spacer {
+  height: 1.25rem;
+  width: 100%;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-medium);
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: var(--spacing-xs);
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  transition: 
+    background-color var(--theme-transition-duration) var(--theme-transition-timing),
+    color var(--theme-transition-duration) var(--theme-transition-timing),
+    border-color var(--theme-transition-duration) var(--theme-transition-timing),
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.theme-toggle .icon-current {
+  width: 20px;
+  height: 20px;
+}
+
+.theme-toggle:hover {
+  background-color: var(--background-pressed);
+  transform: scale(1.02);
+}
+
+.theme-toggle:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--accent-color);
+}
+
+.icon-current {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--text-primary);
+}
+
+/* Now keep the rest of your existing App.css file content */
 #root {
   width: 100%;
   min-height: 100%;
@@ -239,6 +346,9 @@
   color: var(--header-text);
   padding: var(--spacing-md);
   border-radius: var(--radius-md);
+  transition: 
+    background-color var(--theme-transition-duration) var(--theme-transition-timing),
+    color var(--theme-transition-duration) var(--theme-transition-timing);
 }
 
 .header-content {
@@ -252,24 +362,6 @@
 .header-content > div {
   text-align: center;
   width: 100%;
-}
-
-.app-title {
-  font-size: clamp(3rem, 8vw, 6.5rem);
-  font-weight: 900;
-  color: var(--header-text);
-  margin-top: 0;
-  margin-bottom: 0;
-  transition: color var(--theme-transition-duration) var(--theme-transition-timing);
-}
-
-.app-subtitle {
-  font-size: clamp(1rem, 2vw, 1.5rem);
-  font-weight: 100;
-  letter-spacing: 0.05em;
-  margin-top: -0.5rem;
-  color: var(--header-text);
-  transition: color var(--theme-transition-duration) var(--theme-transition-timing);
 }
 
 .editor-wrapper {
@@ -458,12 +550,12 @@
   position: absolute;
   top: calc(100% + 4px);
   left: 0;
-  right: 0;
+  width: 100%;
   background-color: var(--background-primary);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
-  z-index: 100;
+  z-index: 150;
   transition: 
     background-color var(--theme-transition-duration) var(--theme-transition-timing),
     border-color var(--theme-transition-duration) var(--theme-transition-timing);
@@ -628,39 +720,6 @@
 .editor-content ol {
   margin: 0.5rem 0;
   padding-left: 1.5rem;
-}
-
-/* Theme Toggle */
-.theme-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-full);
-  border: 1px solid var(--border-light);
-  background-color: var(--background-primary);
-  color: var(--text-primary);
-  cursor: pointer;
-  padding: var(--spacing-xs);
-  position: fixed;
-  top: 20px;
-  right: 20px;
-}
-
-.theme-toggle .icon-current {
-  width: 20px;
-  height: 20px;
-}
-
-.theme-toggle:hover {
-  background-color: var(--background-pressed);
-  transform: scale(1.02);
-}
-
-.theme-toggle:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px var(--accent-color);
 }
 
 /* SVG Icon Theming - update with consistent transitions */

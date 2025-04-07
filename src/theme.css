@@ -252,7 +252,8 @@ html.light-theme {
 html, body {
   transition: 
     background-color var(--theme-transition-duration) var(--theme-transition-timing),
-    color var(--theme-transition-duration) var(--theme-transition-timing);
+    color var(--theme-transition-duration) var(--theme-transition-timing),
+    border-color var(--theme-transition-duration) var(--theme-transition-timing);
 }
 
 /* Text selection styling with theme transitions */

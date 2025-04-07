@@ -5,6 +5,14 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React + TS</title>
+    <style>
+      /* Prevent flash of white */
+      html { background-color: #f3f3eb; } /* Light theme default */
+      html.dark-theme { background-color: #1c1c1c; } /* Dark theme */
+      @media (prefers-color-scheme: dark) {
+        html:not(.light-theme) { background-color: #1c1c1c; }
+      }
+    </style>
     <script>
       // Immediately apply theme to prevent flash
       (function() {
