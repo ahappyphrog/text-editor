@@ -54,17 +54,6 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
     };
   }, []);
 
-  useEffect(() => {
-    if (isOpen && optionsRef.current) {
-      // Find the selected option element
-      const selectedElement = optionsRef.current.querySelector('.selected');
-      if (selectedElement) {
-        // Scroll to the selected option
-        selectedElement.scrollIntoView({ block: 'nearest' });
-      }
-    }
-  }, [isOpen]);
-
   const handleOptionClick = (option: { value: string; label: string }) => {
     setSelectedOption(option);
     setIsOpen(false);
@@ -131,7 +120,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
         onClick={() => setIsOpen(!isOpen)}
       >
         <span className="dropdown-label">{selectedOption.label}</span>
-        <ChevronDownIcon className="icon-current dropdown-arrow" />
+        <ChevronDownIcon className="h-3 w-3" />
       </div>
       {isOpen && (
         <div 
@@ -733,6 +722,18 @@ const TextEditor: React.FC<TextEditorProps> = ({
 
   const exportToHTML = () => {
     if (!html) return '';
+    
+    // Save current selection state
+    saveSelectionState();
+    
+    // Save current format states before copying
+    const currentBold = isBold;
+    const currentItalic = isItalic;
+    const currentUnderline = isUnderline;
+    const currentStrike = isStrike;
+    const currentOrderedList = isOrderedList;
+    const currentUnorderedList = isUnorderedList;
+    
     const textArea = document.createElement('textarea');
     textArea.value = html;
     document.body.appendChild(textArea);
@@ -743,6 +744,19 @@ const TextEditor: React.FC<TextEditorProps> = ({
     // Show checkmark
     setHtmlCopied(true);
     
+    // Restore the selection
+    setTimeout(() => {
+      restoreSelectionState();
+      
+      // Restore formatting states
+      setIsBold(currentBold);
+      setIsItalic(currentItalic);
+      setIsUnderline(currentUnderline);
+      setIsStrike(currentStrike);
+      setIsOrderedList(currentOrderedList);
+      setIsUnorderedList(currentUnorderedList);
+    }, 10);
+    
     // Reset after 2 seconds
     setTimeout(() => {
       setHtmlCopied(false);
@@ -751,6 +765,17 @@ const TextEditor: React.FC<TextEditorProps> = ({
 
   const exportToMarkdown = () => {
     if (!html) return '';
+    
+    // Save current selection state
+    saveSelectionState();
+    
+    // Save current format states before copying
+    const currentBold = isBold;
+    const currentItalic = isItalic;
+    const currentUnderline = isUnderline;
+    const currentStrike = isStrike;
+    const currentOrderedList = isOrderedList;
+    const currentUnorderedList = isUnorderedList;
     
     // Create a temporary element to handle the HTML
     const tempDiv = document.createElement('div');
@@ -880,6 +905,19 @@ const TextEditor: React.FC<TextEditorProps> = ({
     document.execCommand('copy');
     document.body.removeChild(textArea);
     
+    // Restore the selection and formatting states
+    setTimeout(() => {
+      restoreSelectionState();
+      
+      // Restore formatting states
+      setIsBold(currentBold);
+      setIsItalic(currentItalic);
+      setIsUnderline(currentUnderline);
+      setIsStrike(currentStrike);
+      setIsOrderedList(currentOrderedList);
+      setIsUnorderedList(currentUnorderedList);
+    }, 10);
+    
     // Show checkmark
     setMarkdownCopied(true);
     
@@ -925,7 +963,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
           aria-label="Undo"
           disabled={isUndoDisabled}
         >
-          <UndoIcon className="icon-current" />
+          <UndoIcon className="h-4 w-4" />
         </button>
 
         <button
@@ -936,7 +974,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
           aria-label="Redo"
           disabled={isRedoDisabled}
         >
-          <RedoIcon className="icon-current" />
+          <RedoIcon className="h-4 w-4" />
         </button>
 
         <div className="toolbar-divider"></div>
@@ -968,7 +1006,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
           title="Bold (Ctrl+B)"
           aria-label="Bold"
         >
-          <BoldIcon className="icon-current" />
+          <BoldIcon className="h-4 w-4" />
         </button>
 
         <button
@@ -978,7 +1016,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
           title="Italic (Ctrl+I)"
           aria-label="Italic"
         >
-          <ItalicIcon className="icon-current" />
+          <ItalicIcon className="h-4 w-4" />
         </button>
 
         <button
@@ -988,7 +1026,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
           title="Underline (Ctrl+U)"
           aria-label="Underline"
         >
-          <UnderlineIcon className="icon-current" />
+          <UnderlineIcon className="h-4 w-4" />
         </button>
 
         <button
@@ -998,7 +1036,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
           title="Strikethrough"
           aria-label="Strikethrough"
         >
-          <StrikethroughIcon className="icon-current" />
+          <StrikethroughIcon className="h-4 w-4" />
         </button>
 
         <div className="toolbar-divider"></div>
@@ -1011,7 +1049,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
           title="Ordered List"
           aria-label="Ordered List"
         >
-          <OrderedListIcon className="icon-current" />
+          <OrderedListIcon className="h-4 w-4" />
         </button>
 
         <button
@@ -1021,38 +1059,144 @@ const TextEditor: React.FC<TextEditorProps> = ({
           title="Bullet List"
           aria-label="Bullet List"
         >
-          <UnorderedListIcon className="icon-current" />
+          <UnorderedListIcon className="h-4 w-4" />
         </button>
 
         <div className="editor-spacer"></div>
 
         <button
           type="button"
-          onClick={exportToHTML}
-          className="export-button"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Save the current state right before exporting
+            saveSelectionState();
+            const currentBold = isBold;
+            const currentItalic = isItalic;
+            const currentUnderline = isUnderline;
+            const currentStrike = isStrike;
+            const currentOrderedList = isOrderedList;
+            const currentUnorderedList = isUnorderedList;
+            
+            exportToHTML();
+            
+            // Ensure we restore the formatting states after the click too
+            setTimeout(() => {
+              restoreSelectionState();
+              setIsBold(currentBold);
+              setIsItalic(currentItalic);
+              setIsUnderline(currentUnderline);
+              setIsStrike(currentStrike);
+              setIsOrderedList(currentOrderedList);
+              setIsUnorderedList(currentUnorderedList);
+              checkFormatting();
+            }, 50);
+          }}
+          className="export-button html-btn no-focus"
           title="Copy HTML"
           aria-label="Copy HTML"
+          style={{
+            padding: '0.375rem 0.25rem 0.375rem 0.375rem',
+            display: 'inline-flex',
+            minWidth: '60px',
+            transformOrigin: 'center',
+            transition: 'transform 0.1s ease'
+          }}
+          onMouseDown={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            e.currentTarget.style.transform = 'scale(0.98)';
+          }}
+          onMouseUp={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            e.currentTarget.style.transform = 'scale(1)';
+          }}
+          onMouseLeave={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            e.currentTarget.style.transform = 'scale(1)';
+          }}
         >
-          <span>HTML</span>
+          <span style={{ marginRight: '0.25rem', display: 'inline-block' }}>HTML</span>
           {htmlCopied ? (
-            <CheckIcon className="icon-current success" />
+            <div style={{ display: 'inline-flex', width: '16px', height: '16px' }}>
+              <CheckIcon className="text-success-500" style={{ color: 'var(--success-500)', stroke: 'var(--success-500)', width: '100%', height: '100%' }} />
+            </div>
           ) : (
-            <CopyIcon className="icon-current" />
+            <div style={{ display: 'inline-flex', width: '16px', height: '16px' }}>
+              <CopyIcon style={{ width: '100%', height: '100%' }} />
+            </div>
           )}
         </button>
         
         <button
           type="button"
-          onClick={exportToMarkdown}
-          className="export-button"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Save the current state right before exporting
+            saveSelectionState();
+            const currentBold = isBold;
+            const currentItalic = isItalic;
+            const currentUnderline = isUnderline;
+            const currentStrike = isStrike;
+            const currentOrderedList = isOrderedList;
+            const currentUnorderedList = isUnorderedList;
+            
+            exportToMarkdown();
+            
+            // Ensure we restore the formatting states after the click too
+            setTimeout(() => {
+              restoreSelectionState();
+              setIsBold(currentBold);
+              setIsItalic(currentItalic);
+              setIsUnderline(currentUnderline);
+              setIsStrike(currentStrike);
+              setIsOrderedList(currentOrderedList);
+              setIsUnorderedList(currentUnorderedList);
+              checkFormatting();
+            }, 50);
+          }}
+          className="export-button no-focus"
           title="Copy Markdown"
           aria-label="Copy Markdown"
+          style={{ 
+            padding: '0.375rem 0.375rem 0.375rem 0.375rem', 
+            width: 'auto', 
+            display: 'inline-flex',
+            justifyContent: 'space-between',
+            minWidth: '48px',
+            transformOrigin: 'center',
+            transition: 'transform 0.1s ease'
+          }}
+          onMouseDown={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            e.currentTarget.style.transform = 'scale(0.98)';
+          }}
+          onMouseUp={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            e.currentTarget.style.transform = 'scale(1)';
+          }}
+          onMouseLeave={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            e.currentTarget.style.transform = 'scale(1)';
+          }}
         >
-          <span>MD</span>
+          <span style={{ marginRight: '0.25rem', display: 'inline-block' }}>MD</span>
           {markdownCopied ? (
-            <CheckIcon className="icon-current success" />
+            <div style={{ display: 'inline-flex', width: '16px', height: '16px' }}>
+              <CheckIcon className="text-success-500" style={{ color: 'var(--success-500)', stroke: 'var(--success-500)', width: '100%', height: '100%' }} />
+            </div>
           ) : (
-            <CopyIcon className="icon-current" />
+            <div style={{ display: 'inline-flex', width: '16px', height: '16px' }}>
+              <CopyIcon style={{ width: '100%', height: '100%' }} />
+            </div>
           )}
         </button>
       </div>
